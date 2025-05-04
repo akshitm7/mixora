@@ -3,15 +3,9 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import os
 from dotenv import load_dotenv
-
-# Load environment variables
 load_dotenv()
-
-# Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
-
-# Spotify configuration
 REDIRECT_URI = 'http://localhost:4002/callback'
 SCOPE = 'user-read-currently-playing user-modify-playback-state user-read-playback-state playlist-read-private'
 
@@ -128,7 +122,7 @@ def seek():
     
     try:
         data = request.get_json()
-        seek_time = int(data['time'] * 1000)  # Convert to milliseconds
+        seek_time = int(data['time'] * 1000) 
         
         token_info = session['token_info']
         sp = spotipy.Spotify(auth=token_info['access_token'])
